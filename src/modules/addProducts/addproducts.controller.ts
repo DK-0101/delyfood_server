@@ -2,19 +2,24 @@ import { Request, Response } from 'express';
 import { ProductService } from './addproducts.service';
 
 export class ProductController {
+  static async addProduct(req: Request, res: Response) {
+    try {
+      const { title, description, category, price } = req.body;
+      const image = req.file ? `/uploads/${req.file.filename}` : '';
 
-static async addProduct(req: Request, res: Response) {
-  try {
-    const { title, description, category, price } = req.body;
 
-    const image = req.file ? `/uploads/${req.file.filename}` : '';
-    const product = await ProductService.addProduct({ image, title, description, category, price });
-    res.status(201).json(product);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao adicionar o produto.' });
+      const product = await ProductService.addProduct({
+        image,
+        title,
+        description,
+        category,
+        price,
+      });
+      res.status(201).json(product);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao adicionar o produto.' });
+    }
   }
-}
-
 
   static async getProducts(req: Request, res: Response) {
     try {
@@ -24,7 +29,6 @@ static async addProduct(req: Request, res: Response) {
       res.status(500).json({ error: 'Erro ao buscar produtos.' });
     }
   }
-
 
   static async getProduct(req: Request, res: Response) {
     try {
@@ -46,7 +50,6 @@ static async addProduct(req: Request, res: Response) {
       res.status(500).json({ error: 'Erro ao atualizar o produto.' });
     }
   }
-
 
   static async deleteProduct(req: Request, res: Response) {
     try {

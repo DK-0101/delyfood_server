@@ -2,7 +2,7 @@ import express from "express";
 import cors from 'cors';
 import session from 'express-session';
 import userRoutes from './modules/user/user.routes';
-import cartRoutes from './modules/cart/cart.routes';
+import { cartRoutes } from "./modules/cart/cart.routes";
 import bodyParser from 'body-parser';
 import path from 'path';
 import { productRoutes } from './modules/addProducts/addproducts.routes';

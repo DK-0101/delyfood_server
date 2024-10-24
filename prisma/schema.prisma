@@ -26,6 +26,16 @@ model User {
   newItem NewItems[]
 }
 
+model CartItem {
+  id        Int    @id @default(autoincrement())
+  productId Int
+  quantity  Int
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+
+
 model Order {
   id Int @id @default(autoincrement())
   title String
@@ -37,6 +47,7 @@ model Order {
   client_id Int
 }
 
+
 model AddProduct {
   id Int @id @default(autoincrement())
   image String
@@ -44,15 +55,10 @@ model AddProduct {
   description String
   category String
   price String
+
+  CartItem CartItem[]
 }
 
-model CartItem {
-  id Int @id @default(autoincrement())
-  productId Int
-  quantity  Int
-  user User @relation(fields: [userId], references: [id])
-  userId Int
-}
 
 model NewItems {
   id Int @id @default(autoincrement())

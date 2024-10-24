@@ -2,8 +2,6 @@ import { Request, Response } from 'express';
 import { UserService } from './user.service';
 
 
-
-
 export class UserController {
     
     static async register(req: Request, res: Response) {
